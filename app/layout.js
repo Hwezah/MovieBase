@@ -16,10 +16,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={montserrat.variable}>
       <body
-        className={`font-[var(--font-montserrat)] antialiased min-h-screen bg-background text-foreground bg-gray-900`}
+        className={`font-[var(--font-montserrat)] antialiased min-h-screen bg-background text-foreground bg-gray-900 md:px-4 max-w-[1800px] mx-auto overflow-x-hidden `}
         style={{ fontFamily: "Montserrat, sans-serif" }}
       >
-        <div className="px-6 lg:px-12">{children}</div>
+        <div className="md:pb-4 lg:pb-6 px-0 ">{children}</div>
       </body>
     </html>
   );

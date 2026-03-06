@@ -8,27 +8,25 @@ export default async function MoviePage({ params }) {
   const credits = await fetchCredits(id);
   const trailer = await fetchTrailer(id);
   return (
-    <main className="space-y-8 py-6">
+    <div className="space-y-8 overflow-x-hidden pb-6 text-center md:text-left">
       {/* Hero Section */}
-      <div className="relative h-140 bg-gray-700 rounded-lg overflow-hidden">
+      <div className="relative lg:h-140 h-96 bg-gray-700 rounded-lg overflow-hidden">
         <Image
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
           fill
-          className="object-cover object-center rounded-md"
+          className="object-cover object-center"
         />
       </div>
-      <div className="px-4">
+      <div className="px-4 py-2 lg:py-4 space-y-6">
         <div className="space-y-2">
           <h3 className="text-white font-bold">{movie.title}</h3>
         </div>
 
-        <div className="space-y-2 flex items-start gap-4">
-          <p className="text-gray-300">Released: {movie.release_date}</p>
-          <p className="text-gray-300">Runtime: {movie.runtime} min</p>
-          <p className="text-gray-300">
-            Score: {movie.vote_average.toFixed(1)} / 10
-          </p>
+        <div className="space-y-2 flex items-start justify-around gap-4 text-yellow-500">
+          <p>{movie.release_date}</p>
+          <p>{movie.runtime} min</p>
+          <p>{movie.vote_average.toFixed(1)} / 10</p>
         </div>
 
         <div className="space-y-2">
@@ -37,7 +35,7 @@ export default async function MoviePage({ params }) {
 
         <div className="space-y-2 py-6">
           <h4 className="text-white font-bold">Cast</h4>
-          <div className="flex flex-wrap gap-4 items-center ">
+          <div className="flex flex-wrap gap-4 items-center justify-around">
             {credits.cast.slice(0, 10).map((actor) => (
               <div key={actor.id} className="flex flex-col items-center ">
                 {actor.profile_path && (
@@ -52,7 +50,7 @@ export default async function MoviePage({ params }) {
                   </div>
                 )}
                 <p key={actor.id} className="text-gray-300">
-                  {actor.name}
+                  {actor.name.split(" ").slice(0, 2).join(" ")}
                 </p>
               </div>
             ))}
@@ -67,6 +65,6 @@ export default async function MoviePage({ params }) {
 
         <div className="space-y-2"></div>
       </div>
-    </main>
+    </div>
   );
 }
