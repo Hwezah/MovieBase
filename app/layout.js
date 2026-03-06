@@ -1,14 +1,10 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // optional, include the weights you need
 });
 
 export const metadata = {
@@ -18,11 +14,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={montserrat.variable}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`font-[var(--font-montserrat)] antialiased min-h-screen bg-background text-foreground bg-gray-900`}
+        style={{ fontFamily: "Montserrat, sans-serif" }}
       >
-        {children}
+        <div className="px-6 lg:px-12">{children}</div>
       </body>
     </html>
   );
