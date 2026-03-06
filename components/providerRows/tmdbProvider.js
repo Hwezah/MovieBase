@@ -17,7 +17,7 @@ export default async function TmdbProvider({ category, type }) {
                 className="object-cover rounded-md"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-2">
-                <h3 className="text-lg font-semibold text-white text-sm md:text-base lg:text-lg xl:text-xl">
+                <h3 className="text-lg font-semibold text-white text-sm md:text-base lg:text-lg xl:text-xl leading-tight">
                   {movie.title}
                 </h3>
                 <p className="text-gray-300 text-sm md:text-base lg:text-lg xl:text-xl">
