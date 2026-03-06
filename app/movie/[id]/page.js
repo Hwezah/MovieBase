@@ -34,9 +34,9 @@ export default async function MoviePage({ params }) {
         </div>
 
         <div className="space-y-2 py-6">
-          <h4 className="text-white font-bold">Cast</h4>
+          <h4 className="text-white font-bold mb-4">Cast</h4>
           <div className="flex flex-wrap gap-4 items-center justify-around">
-            {credits.cast.slice(0, 10).map((actor) => (
+            {credits.cast.slice(0, 6).map((actor) => (
               <div key={actor.id} className="flex flex-col items-center ">
                 {actor.profile_path && (
                   <div className="w-24 h-24 flex-shrink-0">
