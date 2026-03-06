@@ -56,7 +56,7 @@ export default function PlayButton({ trailerKey }) {
           </div>
           <button
             onClick={() => setIsPlaying(false)}
-            className="absolute top-94 right-94 text-white text-2xl cursor-pointer"
+            className="absolute top-42 right-8 text-white text-2xl cursor-pointer"
           >
             <X />
           </button>
