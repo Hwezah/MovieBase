@@ -1,11 +1,11 @@
-import Link from "next/link";
-import Image from "next/image";
 import { fetchMedia } from "@/lib/tmdb";
+import Image from "next/image";
+import Link from "next/link";
 
 export default async function TmdbProvider({ category, type }) {
   const movies = await fetchMedia(category, type);
   return (
-    <div className="flex space-x-4 py-2 px-2 snap-x snap-mandatory">
+    <div className="flex space-x-4 py-2 px-2 snap-x snap-mandatory overflow-x-auto">
       {movies.map((movie) =>
         movie.poster_path ? (
           <Link href={`/movie/${movie.id}`} key={movie.id}>
