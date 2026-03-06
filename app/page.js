@@ -6,7 +6,7 @@ export default async function Home() {
   const heroMovie = trending?.results?.[0];
   return (
     <div>
-      <main className="space-y-12 pb-6 ">
+      <main className="space-y-12 pb-6 overflow-x-hidden">
         {/* Hero Section */}
         <div className="relative lg:h-140 h-96 bg-gray-700 rounded-b-lg overflow-hidden">
           {heroMovie && heroMovie.backdrop_path && (
@@ -41,7 +41,7 @@ export default async function Home() {
         </div>
 
         {/* Top Rated Movies Row */}
-        <div className="space-y-2 px-2 md:px-4  ">
+        <div className="space-y-2 px-2 md:px-4 overflow-x-hidden">
           <h2 className="text-white text-xl font-semibold">Top Rated Movies</h2>
           <TmdbProvider category="top_rated" type="movie" />
         </div>
