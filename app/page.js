@@ -7,7 +7,7 @@ import TmdbProvider from "@/components/providerRows/tmdbProvider";
 import CommonHeader from "../components/commonHeader";
 export default async function Home() {
   return (
-    <main className="space-y-12 overflow-x-hidden">
+    <main className="space-y-12 overflow-x-hidden pb-20">
       {/* Hero Section */}
       <CommonHeader />
 
