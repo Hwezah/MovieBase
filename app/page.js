@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+import { Plus } from "lucide-react";
 export const fetchCache = "force-no-store";
 import Link from "next/link";
 import TmdbProvider from "@/components/providerRows/tmdbProvider";
@@ -29,7 +30,7 @@ export default async function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
           <div className="absolute flex justify-center flex-col items-center left-1/2 transform -translate-x-1/2 bottom-10 text-center md:w-[60%] w-[90%] p-6">
-            <h1 className="text-3xl font-bold text-white mb-4">
+            <h1 className="text-xl font-bold text-white mb-4">
               {heroMovie.title}
             </h1>
             <div className="space-y-2 flex items-start justify-around gap-4 text-yellow-500">
@@ -37,11 +38,18 @@ export default async function Home() {
               <p>{movie.runtime} min</p>
               <p>{movie.vote_average.toFixed(1)} / 10</p>
             </div>
-            <div className="flex items-center justify-center gap-4 ">
+            <div className="flex items-center justify-center gap-10 mt-2 ">
+              <Link href={`/movie/${movie.id}`} key={movie.id}>
+                <button className="text-white cursor-pointer flex items-center gap-2 flex flex-col">
+                  <Plus className="w-5 h-5" />
+                  <p>Watchlist</p>
+                </button>
+              </Link>
               <PlayButton trailerKey={movieDetails?.key} className="px-6" />
               <Link href={`/movie/${movie.id}`} key={movie.id}>
-                <button className="p-2 rounded hover:bg-gray-700 text-white cursor-pointer flex items-center gap-2">
+                <button className="text-white cursor-pointer flex items-center gap-2 flex flex-col">
                   <Info className="w-5 h-5" />
+                  <p>More Info</p>
                 </button>
               </Link>
             </div>

@@ -9,20 +9,22 @@ export default async function MoviePage({ params }) {
   const trailer = await fetchTrailer(id);
   console.log(trailer);
   return (
-    <div className="space-y-8 overflow-x-hidden pb-6 text-center md:text-left">
+    <div className="space-y-8 overflow-x-hidden pb-6 text-center md:text-left ">
       {/* Hero Section */}
-
-      <div className="relative lg:h-140 h-96 bg-gray-700 rounded-lg overflow-hidden ">
+      <div className="inset-0 bg-gradient-to-t from-black to-transparent"></div>
+      <div className="relative lg:h-140 h-96 bg-gray-700 rounded-lg overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
         <Image
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
           fill
-          className="object-cover "
+          className="object-cover z-0"
         />
       </div>
+
       <div className="px-4 py-2 lg:py-4 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-white font-bold">{movie.title}</h3>
+          <h3 className="text-white font-bold text-xl">{movie.title}</h3>
         </div>
 
         <div className="space-y-2 flex items-start justify-around gap-4 text-yellow-500">
@@ -36,7 +38,7 @@ export default async function MoviePage({ params }) {
         </div>
 
         <div className="space-y-2 py-6">
-          <h4 className="text-white font-bold mb-8">Cast</h4>
+          <h4 className="text-white font-bold mb-8 text-xl">Cast</h4>
           <div className="flex flex-wrap gap-6 items-center justify-around">
             {credits?.cast?.slice(0, 6).map((actor) => (
               <div key={actor.id} className="flex flex-col items-center ">

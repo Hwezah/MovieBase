@@ -20,11 +20,9 @@ export default async function TmdbProvider({ category, type }) {
                 <h3 className="text-lg font-semibold text-white text-sm md:text-base leading-none">
                   {movie.title}
                 </h3>
-                <p className="text-gray-300 text-sm md:text-base lg:text-lg xl:text-xl">
-                  {movie.release_date}
-                </p>
+                <p className="text-gray-300 text-sm ">{movie.release_date}</p>
               </div>
-              <p className="text-gray-300 text-sm md:text-base lg:text-lg xl:text-xl absolute top-2 right-2 bg-black bg-opacity-75 text-yellow-500 px-1 rounded">
+              <p className="text-gray-300 text-sm md:text-base absolute top-2 right-2 bg-black bg-opacity-75 text-yellow-500 px-1 rounded">
                 {movie.vote_average.toFixed(1)}
               </p>
             </div>
