@@ -58,7 +58,7 @@ export default async function MoviePage({ params }) {
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-4 w-full">
-          <PlayButton trailerKey={trailer.key} />
+          <PlayButton trailerKey={trailer.key} className="flex-1" />
           <DownloadButton movieId={movie.id} />
         </div>
 

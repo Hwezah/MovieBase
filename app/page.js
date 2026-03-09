@@ -1,14 +1,18 @@
 import TmdbProvider from "@/components/providerRows/tmdbProvider";
-import { fetchMedia } from "@/lib/tmdb";
+import PlayButton from "@/components/Buttons/playButton";
+import { Info } from "lucide-react";
+import { fetchMedia, fetchMediaDetails } from "@/lib/tmdb";
 import Image from "next/image";
 export default async function Home() {
   const trending = await fetchMedia("trending", "movie");
-  const heroMovie = trending?.results?.[0];
+  const randomIndex = Math.floor(Math.random() * trending.length);
+  const heroMovie = trending?.[randomIndex];
+  const movieDetails = await fetchMediaDetails(heroMovie.id);
   return (
     <div>
       <main className="space-y-12 pb-6 overflow-x-hidden">
         {/* Hero Section */}
-        <div className="relative lg:h-140 h-96 bg-gray-700 rounded-b-lg overflow-hidden">
+        <div className="relative w-full lg:h-140 h-96 bg-gray-700 rounded-b-lg overflow-hidden bg-gradient-to-t from-black to-transparent">
           {heroMovie && heroMovie.backdrop_path && (
             <Image
               src={`https://image.tmdb.org/t/p/original${heroMovie.backdrop_path}`}
@@ -18,6 +22,16 @@ export default async function Home() {
               className="object-cover"
             />
           )}
+          <div className="absolute flexx justify-center items-center left-1/2 transform -translate-x-1/2 bottom-10 text-center w-[50%] p-4">
+            <h1 className="text-3xl font-bold text-white">{heroMovie.title}</h1>
+            <p className="text-gray-300 mt-2">{movieDetails.overview}</p>
+            <div className="flex items-center justify-center gap-4 mt-6">
+              <PlayButton trailerKey={movieDetails?.key} className="px-6" />
+              <button className="p-2 rounded hover:bg-gray-700 text-white ">
+                <Info className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Trending Movies Row */}

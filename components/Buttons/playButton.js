@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import { X } from "lucide-react";
 
-export default function PlayButton({ trailerKey }) {
+export default function PlayButton({ trailerKey, className = "" }) {
   const { isPlaying, setIsPlaying } = useStateContext();
   const modalRef = useRef(null);
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function PlayButton({ trailerKey }) {
     <>
       <Button
         onClick={handlePlayClick}
-        className="px-4 flex items-center py-4 lg:py-6 bg-white text-black rounded-sm hover:bg-black hover:text-white transition-colors flex-1 text-center cursor-pointer"
+        className={` flex items-center py-4 lg:py-6 bg-white text-black rounded-sm hover:bg-black hover:text-white transition-colors  text-center cursor-pointer ${className}`}
       >
         <Play className="w-6 h-6" />
         Play
