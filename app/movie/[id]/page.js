@@ -11,17 +11,19 @@ export default async function MoviePage({ params }) {
   return (
     <div className="space-y-8 overflow-x-hidden pb-6 text-center md:text-left ">
       {/* Hero Section */}
-      <div className="inset-0 bg-gradient-to-t from-black to-transparent"></div>
+      <div className="inset-0 bg-gradient-to-t from-black to-transparent opacity-90"></div>
       <div className="relative lg:h-140 h-96 bg-gray-700 rounded-lg overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10 opacity-90"></div>
         <Image
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
           fill
-          className="object-cover z-0"
+          className="object-cover z-0 "
         />
       </div>
-
+      {/* <h2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-xl">
+        {movie.title}
+      </h2> */}
       <div className="px-4 py-2 lg:py-4 space-y-6">
         <div className="space-y-2">
           <h3 className="text-white font-bold text-xl">{movie.title}</h3>

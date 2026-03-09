@@ -44,7 +44,7 @@ export default function PlayButton({ trailerKey, className = "" }) {
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
           <div
             ref={modalRef}
-            className="relative w-11/12 md:w-3/4 lg:w-1/2 aspect-video"
+            className="relative w-11/12 md:w-3/4 lg:w-1/2 aspect-video z-50"
           >
             <iframe
               src={`https://www.youtube.com/embed/${trailerKey}`}

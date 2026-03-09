@@ -17,7 +17,7 @@ export default async function Home() {
     <div>
       <main className="space-y-12 pb-6 overflow-x-hidden">
         {/* Hero Section */}
-        <div className="relative w-full lg:h-140 h-96 bg-gray-700 rounded-b-lg overflow-hidden bg-gradient-to-t from-black to-transparent">
+        <div className="relative w-full lg:h-140 h-96 bg-gray-700 rounded-b-lg overflow-hidden bg-gradient-to-t from-black to-transparent ">
           {heroMovie && heroMovie.backdrop_path && (
             <Image
               src={`https://image.tmdb.org/t/p/original${heroMovie.backdrop_path}`}
@@ -27,7 +27,7 @@ export default async function Home() {
               className="object-cover"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-90"></div>
 
           <div className="absolute flex justify-center flex-col items-center left-1/2 transform -translate-x-1/2 bottom-10 text-center md:w-[60%] w-[90%] p-6">
             <h1 className="text-xl font-bold text-white mb-4">
@@ -38,13 +38,14 @@ export default async function Home() {
               <p>{movie.runtime} min</p>
               <p>{movie.vote_average.toFixed(1)} / 10</p>
             </div>
-            <div className="flex items-center justify-center gap-10 mt-2 ">
-              <Link href={`/movie/${movie.id}`} key={movie.id}>
+            <div className="flex items-center justify-center gap-10 ">
+              <Link href={`/watchlist`}>
                 <button className="text-white cursor-pointer flex items-center gap-2 flex flex-col">
                   <Plus className="w-5 h-5" />
                   <p>Watchlist</p>
                 </button>
               </Link>
+
               <PlayButton trailerKey={movieDetails?.key} className="px-6" />
               <Link href={`/movie/${movie.id}`} key={movie.id}>
                 <button className="text-white cursor-pointer flex items-center gap-2 flex flex-col">
