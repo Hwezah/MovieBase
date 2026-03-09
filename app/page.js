@@ -1,13 +1,17 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+import Link from "next/link";
 import TmdbProvider from "@/components/providerRows/tmdbProvider";
 import PlayButton from "@/components/Buttons/playButton";
 import { Info } from "lucide-react";
 import { fetchMedia, fetchMediaDetails } from "@/lib/tmdb";
 import Image from "next/image";
 export default async function Home() {
-  const trending = await fetchMedia("trending", "movie");
+  const trending = await fetchMedia("trending", "movie", { cache: "no-store" });
   const randomIndex = Math.floor(Math.random() * trending.length);
   const heroMovie = trending?.[randomIndex];
   const movieDetails = await fetchMediaDetails(heroMovie.id);
+  const movie = movieDetails;
   return (
     <div>
       <main className="space-y-12 pb-6 overflow-x-hidden">
@@ -22,14 +26,22 @@ export default async function Home() {
               className="object-cover"
             />
           )}
-          <div className="absolute flexx justify-center items-center left-1/2 transform -translate-x-1/2 bottom-10 text-center md:w-[60%] w-[90%] p-4">
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+
+          <div className="absolute flex justify-center flex-col items-center left-1/2 transform -translate-x-1/2 bottom-10 text-center md:w-[60%] w-[90%] p-6">
             <h1 className="text-3xl font-bold text-white">{heroMovie.title}</h1>
-            <p className="text-gray-300 mt-2">{movieDetails.overview}</p>
-            <div className="flex items-center justify-center gap-4 mt-6">
+            <div className="space-y-2 flex items-start justify-around gap-4 text-yellow-500">
+              <p>{movie.release_date}</p>
+              <p>{movie.runtime} min</p>
+              <p>{movie.vote_average.toFixed(1)} / 10</p>
+            </div>
+            <div className="flex items-center justify-center gap-4 ">
               <PlayButton trailerKey={movieDetails?.key} className="px-6" />
-              <button className="p-2 rounded hover:bg-gray-700 text-white ">
-                <Info className="w-5 h-5" />
-              </button>
+              <Link href={`/movie/${movie.id}`} key={movie.id}>
+                <button className="p-2 rounded hover:bg-gray-700 text-white cursor-pointer flex items-center gap-2">
+                  <Info className="w-5 h-5" />
+                </button>
+              </Link>
             </div>
           </div>
         </div>

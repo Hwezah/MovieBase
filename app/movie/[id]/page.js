@@ -11,12 +11,13 @@ export default async function MoviePage({ params }) {
   return (
     <div className="space-y-8 overflow-x-hidden pb-6 text-center md:text-left">
       {/* Hero Section */}
-      <div className="relative lg:h-140 h-96 bg-gray-700 rounded-lg overflow-hidden">
+
+      <div className="relative lg:h-140 h-96 bg-gray-700 rounded-lg overflow-hidden ">
         <Image
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
           fill
-          className="object-cover object-center"
+          className="object-cover "
         />
       </div>
       <div className="px-4 py-2 lg:py-4 space-y-6">
