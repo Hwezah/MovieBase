@@ -22,7 +22,7 @@ export default async function Home() {
               className="object-cover"
             />
           )}
-          <div className="absolute flexx justify-center items-center left-1/2 transform -translate-x-1/2 bottom-10 text-center w-[50%] p-4">
+          <div className="absolute flexx justify-center items-center left-1/2 transform -translate-x-1/2 bottom-10 text-center md:w-[60%] w-[90%] p-4">
             <h1 className="text-3xl font-bold text-white">{heroMovie.title}</h1>
             <p className="text-gray-300 mt-2">{movieDetails.overview}</p>
             <div className="flex items-center justify-center gap-4 mt-6">
