@@ -1,11 +1,12 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
+import { useStateContext } from "@/components/contextProvider";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import { X } from "lucide-react";
 
 export default function PlayButton({ trailerKey }) {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { isPlaying, setIsPlaying } = useStateContext();
   const modalRef = useRef(null);
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -23,7 +24,7 @@ export default function PlayButton({ trailerKey }) {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [isPlaying]);
+  }, [isPlaying, setIsPlaying]);
 
   const handlePlayClick = () => {
     setIsPlaying(true);

@@ -1,6 +1,6 @@
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-
+import {StateContextProvider} from "@/components/contextProvider";
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
@@ -19,7 +19,11 @@ export default function RootLayout({ children }) {
         className={`font-[var(--font-montserrat)] antialiased min-h-screen bg-background text-foreground bg-gray-900 md:px-4 max-w-[1800px] mx-auto overflow-x-hidden `}
         style={{ fontFamily: "Montserrat, sans-serif" }}
       >
-        <div className="md:pb-4 lg:pb-6 px-0 ">{children}</div>
+        <StateContextProvider>
+          <div className="md:pb-4 lg:pb-6 px-0 ">
+            {children}
+          </div>
+        </StateContextProvider>
       </body>
     </html>
   );

@@ -12,7 +12,7 @@ export default async function TmdbProvider({ category, type }) {
             <div className="relative cursor-pointer flex-shrink-0 w-28 h-42 md:w-36 md:h-52 rounded-md snap-start hover:scale-105 transition-transform shadow-lg bg-gray-800">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
+                alt={movie.title || movie.name || "Movie poster"}
                 fill
                 className="object-cover rounded-md"
               />

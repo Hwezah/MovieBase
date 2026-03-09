@@ -7,6 +7,7 @@ export default async function MoviePage({ params }) {
   const movie = await fetchMediaDetails(id);
   const credits = await fetchCredits(id);
   const trailer = await fetchTrailer(id);
+  console.log(trailer);
   return (
     <div className="space-y-8 overflow-x-hidden pb-6 text-center md:text-left">
       {/* Hero Section */}
@@ -36,7 +37,7 @@ export default async function MoviePage({ params }) {
         <div className="space-y-2 py-6">
           <h4 className="text-white font-bold mb-8">Cast</h4>
           <div className="flex flex-wrap gap-6 items-center justify-around">
-            {credits.cast.slice(0, 6).map((actor) => (
+            {credits?.cast?.slice(0, 6).map((actor) => (
               <div key={actor.id} className="flex flex-col items-center ">
                 {actor.profile_path && (
                   <div className="w-24 h-24 flex-shrink-0">
