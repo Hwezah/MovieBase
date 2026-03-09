@@ -29,7 +29,9 @@ export default async function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
           <div className="absolute flex justify-center flex-col items-center left-1/2 transform -translate-x-1/2 bottom-10 text-center md:w-[60%] w-[90%] p-6">
-            <h1 className="text-3xl font-bold text-white">{heroMovie.title}</h1>
+            <h1 className="text-3xl font-bold text-white mb-4">
+              {heroMovie.title}
+            </h1>
             <div className="space-y-2 flex items-start justify-around gap-4 text-yellow-500">
               <p>{movie.release_date}</p>
               <p>{movie.runtime} min</p>
