@@ -1,5 +1,5 @@
 import CommonHeader from "@/components/commonHeader";
-export default function FooterLayout({ children }) {
+export default function WatchListLayout({ children }) {
   return (
     <div>
       <CommonHeader />

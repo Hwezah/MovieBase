@@ -7,16 +7,16 @@ export default function Footer() {
         <Link href="/">
           <Home />
         </Link>
-        <Link href="/footerRow/search">
+        <Link href="/search">
           <Search />
         </Link>
-        <Link href="/footerRow/watchlist">
+        <Link href="/watchlist">
           <Folder />
         </Link>
-        <Link href="/footerRow/download">
+        <Link href="/download">
           <Download />
         </Link>
-        <Link href="/footerRow/settings">
+        <Link href="/settings">
           <Settings />
         </Link>
       </div>

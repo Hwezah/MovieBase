@@ -1,3 +1,4 @@
+import {SessionProvider} from "next-auth/react";
 import { Montserrat } from "next/font/google";
 import Footer from "@/components/footer";
 import "./globals.css";
@@ -20,12 +21,14 @@ export default function RootLayout({ children }) {
         className={`font-[var(--font-montserrat)] antialiased min-h-screen bg-background text-foreground bg-gray-900 md:px-4 max-w-[1800px] mx-auto overflow-x-hidden `}
         style={{ fontFamily: "Montserrat, sans-serif" }}
       >
-        <StateContextProvider>
-          <div className="px-0 flex flex-col min-h-screen justify-between">
-            {children}
-            <Footer />
-          </div>
-        </StateContextProvider>
+        <SessionProvider>
+          <StateContextProvider>
+            <div className="px-0 flex flex-col min-h-screen justify-between">
+              {children}
+              <Footer />
+            </div>
+          </StateContextProvider>
+        </SessionProvider>
       </body>
     </html>
   );
