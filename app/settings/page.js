@@ -7,8 +7,8 @@ export default async function SettingsPage() {
   const { email, name, image } = user || {};
 
   return (
-    <div>
-      <h1 className="text-white text-center md:text-left font-bold text-2xl mt-8">
+    <div className="flex flex-col items-center  md:items-start  max-w-7xl mx-auto px-2 lg:px-4">
+      <h1 className="text-white text-center  md:text-left font-bold text-2xl mt-8">
         Settings
       </h1>
       <div className="flex md:gap-4  p-6">
