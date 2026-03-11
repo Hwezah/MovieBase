@@ -18,7 +18,7 @@ export default async function SearchResultsPage({ searchParams }) {
     <div className="space-y-8 overflow-x-hidden py-8 px-4 text-center md:text-left ">
       <h1 className="text-white font-bold text-2xl">Search</h1>
       <form method="GET">
-        <div className="relative md:w-[90%] w-full">
+        <div className="relative md:w-[90%] w-full flex items-center mx-auto">
           <Search
             size={24}
             strokeWidth={1}
@@ -28,7 +28,7 @@ export default async function SearchResultsPage({ searchParams }) {
             name="q"
             type="text"
             placeholder="Search for a show, movie, or genre"
-            className="w-full border border-[#1E2939] py-3 lg:py-4 xl:py-5 pl-12 pr-4 rounded-full text-gray-400 text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#1E2939] focus:border-transparent transition duration-300"
+            className="w-full border border-[#1E2939] py-3 lg:py-4 xl:py-5 pl-12 pr-4 rounded-full text-gray-400 mx-auto text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#1E2939] focus:border-transparent transition duration-300"
           />
         </div>
       </form>
