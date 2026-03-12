@@ -1,5 +1,6 @@
 import { searchMedia } from "@/lib/tmdb";
 import { Search } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 export default async function SearchResultsPage({ searchParams }) {
   const query = (await searchParams).q;
@@ -34,31 +35,33 @@ export default async function SearchResultsPage({ searchParams }) {
       </form>
       <div className="flex gap-4 px-2 md:px-4 overflow-x-auto snap-x h-64 py-4 snap-mandatory">
         {results.map((result) => (
-          <div
-            key={result.id}
-            className="bg-[#1E2939] cursor-pointer  relative rounded-md overflow-hidden shadow-lg w-28 h-42 md:w-36 md:h-52 snap-start hover:scale-105 transition-transform flex-shrink-0"
-          >
-            <Image
-              src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}
-              alt={result.name || result.title}
-              width={200}
-              height={300}
-              className="object-cover rounded-md w-full h-full"
-            />
-            <div className="absolute bottom-2 left-2 right-2 text-white text-sm  font-semibold ">
-              <h2 className="text-white font-semi-bold text-xs md:text-sm leading-none">
-                {result.name || result.title}
-              </h2>
-              <p className="text-gray-400 text-xs md:text-sm">
-                {result.release_date || result.first_air_date}
-              </p>
+          <Link href={`/movie/${result.id}`} key={result.id} className="block">
+            <div
+              key={result.id}
+              className="bg-[#1E2939] cursor-pointer  relative rounded-md overflow-hidden shadow-lg w-28 h-42 md:w-36 md:h-52 snap-start hover:scale-105 transition-transform flex-shrink-0"
+            >
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}
+                alt={result.name || result.title}
+                width={200}
+                height={300}
+                className="object-cover rounded-md w-full h-full"
+              />
+              <div className="absolute bottom-2 left-2 right-2 text-white text-sm  font-semibold ">
+                <h2 className="text-white font-semi-bold text-xs md:text-sm leading-none">
+                  {result.name || result.title}
+                </h2>
+                <p className="text-gray-400 text-xs md:text-sm">
+                  {result.release_date || result.first_air_date}
+                </p>
+              </div>
+              {result.vote_average && (
+                <p className="absolute top-2 right-2 bg-[#1E2939] text-white text-xs font-semibold py-1 px-2 rounded-md">
+                  {result.vote_average.toFixed(1)}
+                </p>
+              )}
             </div>
-            {result.vote_average && (
-              <p className="absolute top-2 right-2 bg-[#1E2939] text-white text-xs font-semibold py-1 px-2 rounded-md">
-                {result.vote_average.toFixed(1)}
-              </p>
-            )}
-          </div>
+          </Link>
         ))}
       </div>
     </div>
