@@ -45,7 +45,7 @@ export default async function CommonHeader({ title }) {
             </Link>
 
             <PlayButton trailerKey={trailer?.key} className="px-6" />
-            <Link href={`/movie/${movie.id}`} key={movie.id}>
+            <Link href={`/watch/movie-${movie.id}`} key={movie.id}>
               <button className="text-white cursor-pointer flex items-center gap-2 flex flex-col">
                 <Info className="w-5 h-5" />
                 <p>More Info</p>

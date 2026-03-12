@@ -1,5 +1,5 @@
-import { fetchMedia } from "@/lib/tmdb";
 import TmdbInfiniteRow from "@/components/providerRows/TmdbInfiniteRow";
+import { fetchMedia } from "@/lib/tmdb";
 
 export default async function TmdbProvider({ category, type }) {
   const data = await fetchMedia(category, type, {
