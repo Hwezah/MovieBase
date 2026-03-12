@@ -44,7 +44,7 @@ export default async function CommonHeader({ title }) {
               </button>
             </Link>
 
-            <PlayButton trailerKey={trailer?.key} className="px-6" />
+            <PlayButton trailerKey={trailer?.key} className="px-6" overlayClass="bg-transparent"/>
             <Link href={`/watch/movie-${movie.id}`} key={movie.id}>
               <button className="text-white cursor-pointer flex items-center gap-2 flex flex-col">
                 <Info className="w-5 h-5" />

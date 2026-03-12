@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import { X } from "lucide-react";
 
-export default function PlayButton({ trailerKey, className = "" }) {
+export default function PlayButton({ trailerKey, className = "", overlayClass = "bg-black bg-opacity-80" }) {
   const { isPlaying, setIsPlaying } = useStateContext();
   const modalRef = useRef(null);
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function PlayButton({ trailerKey, className = "" }) {
       </Button>
 
       {isPlaying && (
-        <div className="fixed inset-0 bg-transparent bg-opacity-80 flex items-center justify-center z-50">
+        <div className={`fixed inset-0 ${overlayClass} flex items-center justify-center z-50`}>
           <div
             ref={modalRef}
             className="relative w-11/12 md:w-3/4 lg:w-1/2 aspect-video z-50"
@@ -52,7 +52,7 @@ export default function PlayButton({ trailerKey, className = "" }) {
               frameBorder="0"
               allow="autoplay; encrypted-media"
               allowFullScreen
-              className="w-full h-full rounded-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              className="w-full h-full rounded-md"
             />
           </div>
           <button
