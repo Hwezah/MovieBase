@@ -1,34 +1,21 @@
 import { fetchMedia } from "@/lib/tmdb";
-import Image from "next/image";
-import Link from "next/link";
+import TmdbInfiniteRow from "@/components/providerRows/TmdbInfiniteRow";
 
 export default async function TmdbProvider({ category, type }) {
-  const movies = await fetchMedia(category, type);
+  const data = await fetchMedia(category, type, {
+    page: 1,
+    includeMeta: true,
+    cache: "no-store",
+  });
+  const movies = data?.results ?? [];
+  const totalPages = data?.total_pages ?? null;
   return (
-    <div className="flex space-x-4 py-2 px-2 snap-x snap-mandatory overflow-x-auto">
-      {movies.map((movie) =>
-        movie.poster_path ? (
-          <Link key={movie.id} href={`/watch/${type}-${movie.id}`}>
-            <div className="relative cursor-pointer flex-shrink-0 w-28 h-42 md:w-36 md:h-52 rounded-md snap-start hover:scale-105 transition-transform shadow-lg bg-gray-800">
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title || movie.name || "Movie poster"}
-                fill
-                className="object-cover rounded-md"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-2">
-                <h3 className="text-lg font-semibold text-white text-sm md:text-base leading-none">
-                  {movie.title || movie.name}
-                </h3>
-                <p className="text-gray-300 text-sm ">{movie.release_date}</p>
-              </div>
-              <p className="text-gray-300 text-sm md:text-base absolute top-2 right-2 bg-black bg-opacity-75 text-yellow-500 px-1 rounded">
-                {movie.vote_average.toFixed(1)}
-              </p>
-            </div>
-          </Link>
-        ) : null,
-      )}
-    </div>
+    <TmdbInfiniteRow
+      category={category}
+      type={type}
+      initialItems={movies}
+      initialPage={1}
+      initialTotalPages={totalPages}
+    />
   );
 }
