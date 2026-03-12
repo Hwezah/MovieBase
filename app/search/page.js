@@ -33,7 +33,7 @@ export default async function SearchResultsPage({ searchParams }) {
           />
         </div>
       </form>
-      <div className="flex gap-4 px-2 md:px-4 overflow-x-auto snap-x h-64 py-4 snap-mandatory">
+      <div className="flex gap-4 px-2 md:px-4 overflow-x-auto snap-x h-64 py-4 snap-mandatory mb-12">
         {results.map((result) => {
           const mediaType =
             result.media_type || (result.first_air_date ? "tv" : "movie");
