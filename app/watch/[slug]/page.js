@@ -1,13 +1,19 @@
 import DownloadButton from "@/components/Buttons/downloadButton";
 import PlayButton from "@/components/Buttons/playButton";
-import { fetchCredits, fetchMediaDetails, fetchTrailer } from "@/lib/tmdb";
+import {fetchMediaDetails} from "@/lib/tmdb";
 import Image from "next/image";
 export default async function MoviePage({ params }) {
-  const { id } = await params;
-  const movie = await fetchMediaDetails(id);
-  const credits = await fetchCredits(id);
-  const trailer = await fetchTrailer(id);
-  console.log(trailer);
+  const { slug } = await params;
+  const [type, id] = slug.split("-");
+  const movie = await fetchMediaDetails(type, id);
+  const credits = movie.credits;
+  const trailer = movie.videos?.results.find(
+    (video) => video.type === "Trailer" && video.site === "YouTube",
+  );
+  const title = movie.title || movie.name;
+  const releaseDate = movie.release_date || movie.first_air_date;
+  const runtime = movie.runtime || movie.episode_run_time?.[0];
+
   return (
     <div className="overflow-x-hidden pb-20 text-center md:text-left ">
       {/* Hero Section */}
@@ -15,8 +21,8 @@ export default async function MoviePage({ params }) {
       <div className="relative lg:h-140 h-96 bg-gray-700 rounded-b-sm overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10 opacity-90"></div>
         <Image
-          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-          alt={movie.title}
+          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}}`}
+          alt={title}
           fill
           className="object-cover object-center z-0 "
         />
@@ -26,12 +32,12 @@ export default async function MoviePage({ params }) {
       </h2> */}
       <div className="px-4 py-2 lg:py-4 space-y-6">
         <div className="">
-          <h3 className="text-white font-bold text-xl mt-6">{movie.title}</h3>
+          <h3 className="text-white font-bold text-xl mt-6">{title}</h3>
         </div>
 
         <div className="space-y-2 flex items-start justify-around gap-4 text-yellow-500">
-          <p>{movie.release_date}</p>
-          <p>{movie.runtime} min</p>
+          <p>{releaseDate}</p>
+          <p>{runtime} min</p>
           <p>{movie.vote_average.toFixed(1)} / 10</p>
         </div>
 
@@ -63,13 +69,9 @@ export default async function MoviePage({ params }) {
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-4 w-full">
-          <PlayButton trailerKey={trailer.key} className="flex-1" />
+          <PlayButton trailerKey={trailer?.key} className="flex-1" />
           <DownloadButton movieId={movie.id} />
         </div>
-
-        <div className="space-y-2"></div>
-
-        <div className="space-y-2"></div>
       </div>
     </div>
   );

@@ -8,7 +8,10 @@ export default async function CommonHeader({ title }) {
   const trending = await fetchMedia("trending", "movie", { cache: "no-store" });
   const randomIndex = Math.floor(Math.random() * trending.length);
   const heroMovie = trending?.[randomIndex];
-  const movieDetails = await fetchMediaDetails(heroMovie.id);
+  const movieDetails = await fetchMediaDetails("movie", heroMovie.id);
+  const trailer = movieDetails.videos?.results.find(
+    (video) => video.type === "Trailer" && video.site === "YouTube",
+  );
   const movie = movieDetails;
   return (
     <div>
@@ -41,7 +44,7 @@ export default async function CommonHeader({ title }) {
               </button>
             </Link>
 
-            <PlayButton trailerKey={movieDetails?.key} className="px-6" />
+            <PlayButton trailerKey={trailer?.key} className="px-6" />
             <Link href={`/movie/${movie.id}`} key={movie.id}>
               <button className="text-white cursor-pointer flex items-center gap-2 flex flex-col">
                 <Info className="w-5 h-5" />
