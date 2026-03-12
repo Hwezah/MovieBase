@@ -41,7 +41,7 @@ export default function PlayButton({ trailerKey, className = "" }) {
       </Button>
 
       {isPlaying && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-transparent bg-opacity-80 flex items-center justify-center z-50">
           <div
             ref={modalRef}
             className="relative w-11/12 md:w-3/4 lg:w-1/2 aspect-video z-50"
@@ -52,12 +52,12 @@ export default function PlayButton({ trailerKey, className = "" }) {
               frameBorder="0"
               allow="autoplay; encrypted-media"
               allowFullScreen
-              className="w-full h-full rounded-md"
+              className="w-full h-full rounded-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
             />
           </div>
           <button
             onClick={() => setIsPlaying(false)}
-            className="absolute top-42 right-8 text-white text-2xl cursor-pointer"
+            className="absolute top-62 right-68  text-white text-2xl cursor-pointer"
           >
             <X />
           </button>
