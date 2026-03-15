@@ -1,4 +1,5 @@
 import DownloadButton from "@/components/Buttons/downloadButton";
+import AddToWatchlistBtn from "@/components/Buttons/addToWatchlistBtn";
 import PlayButton from "@/components/Buttons/playButton";
 import {fetchMediaDetails} from "@/lib/tmdb";
 import Image from "next/image";
@@ -70,6 +71,7 @@ export default async function MoviePage({ params }) {
         </div>
         <div className="flex flex-col md:flex-row gap-4 w-full">
           <PlayButton trailerKey={trailer?.key} className="flex-1" />
+          <AddToWatchlistBtn movie={movie} />
           <DownloadButton movieId={movie.id} />
         </div>
       </div>
