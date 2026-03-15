@@ -24,8 +24,8 @@ export default function AddToWatchlistBtn({ movie }) {
       {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Plus className="w-5 h-5" />}
       <p className={message?.success ? "text-green-400" : message?.error ? "text-red-400" : "text-white"}>
         {loading && "Adding..."}
-        {message?.success && "Added to Watchlist!"}
-        {message?.error && "Already in Watchlist"}
+        {message?.success && "Watchlisted!"}
+        {message?.error && "Already Watchlisted"}
         {!loading && !message && "Watchlist"}
       </p>
     </button>
