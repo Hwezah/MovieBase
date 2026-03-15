@@ -21,7 +21,7 @@ export default async function MoviePage({ params }) {
       <div className="relative lg:h-140 h-96 bg-gray-700 rounded-b-sm overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10 opacity-90"></div>
         <Image
-          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}}`}
+          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`}
           alt={title}
           fill
           className="object-cover object-center z-0 "

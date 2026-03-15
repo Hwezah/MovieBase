@@ -1,6 +1,6 @@
 import PlayButton from "@/components/Buttons/playButton";
 import { Info } from "lucide-react";
-import { Plus } from "lucide-react";
+import AddToWatchlistBtn from "@/components/Buttons/addToWatchlistBtn";
 import Link from "next/link";
 import { fetchMedia, fetchMediaDetails } from "@/lib/tmdb";
 import Image from "next/image";
@@ -37,13 +37,7 @@ export default async function CommonHeader({ title }) {
             <p>{movie.vote_average.toFixed(1)} / 10</p>
           </div>
           <div className="flex items-center justify-center gap-10 ">
-            <Link href={`/footerRow/watchlist`}>
-              <button className="text-white cursor-pointer flex items-center gap-2 flex flex-col">
-                <Plus className="w-5 h-5" />
-                <p>Watchlist</p>
-              </button>
-            </Link>
-
+                <AddToWatchlistBtn movie={movie} />  
             <PlayButton trailerKey={trailer?.key} className="px-6" overlayClass="bg-transparent"/>
             <Link href={`/watch/movie-${movie.id}`} key={movie.id}>
               <button className="text-white cursor-pointer flex items-center gap-2 flex flex-col">
