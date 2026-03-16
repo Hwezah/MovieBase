@@ -1,3 +1,4 @@
+import Link from "next/link";
 import DownloadButton from "@/components/Buttons/downloadButton";
 import AddToWatchlistBtn from "@/components/Buttons/addToWatchlistBtn";
 import PlayButton from "@/components/Buttons/playButton";
@@ -56,8 +57,12 @@ export default async function MoviePage({ params }) {
           <h4 className="text-white font-bold mb-8 text-xl">Cast</h4>
           <div className="flex flex-wrap gap-6 items-center justify-around">
             {credits?.cast?.slice(0, 6).map((actor) => (
-              <div key={actor.id} className="flex flex-col items-center ">
+              
+              <Link href={`/actor/${actor.id}`} key={actor.id}>
+                
+              <div  className="flex flex-col items-center ">
                 {actor.profile_path && (
+                  
                   <div className="w-24 h-24 shrink-0">
                     <Image
                       className="rounded-full object-cover w-full h-full"
@@ -68,11 +73,11 @@ export default async function MoviePage({ params }) {
                     />
                   </div>
                 )}
-                <p key={actor.id} className="text-gray-300">
+                <p  className="text-gray-300">
                   {actor.name.split(" ").slice(0, 2).join(" ")}
                 </p>
               </div>
-            ))}
+              </Link>))}
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-4 w-full">
