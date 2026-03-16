@@ -25,7 +25,7 @@ export default function RemoveFromWatchlistBtn({ movie }) {
     >
       {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Minus className="text-white w-8 h-8 transform transition-transform duration-300 group-hover:scale-110"  strokeWidth={1}  />}
       <p
-  className={`leading-none -mt-1 ${
+  className={`leading-none -mt-1.5 ${
     message?.success ? "text-green-400" :
     message?.error ? "text-red-400" :
     "text-white"

@@ -9,9 +9,9 @@ export default function MovieCardOverlay({ movie, type }) {
 
   return (
     <Link href={`/watch/${type ? type : "movie"}-${movie.id}`}>
-      <div className="relative cursor-pointer flex-shrink-0 w-28 h-[168px] md:w-36 md:h-[208px] rounded-md snap-start hover:scale-105 transition-transform text-center duration-200 shadow-lg bg-gray-800">
+      <div className="relative cursor-pointer shrink-0 w-28 h-[168px] md:w-36 md:h-[208px] rounded-md snap-start hover:scale-105 transition-transform text-center duration-200 shadow-lg bg-gray-800">
 
-        <div className="relative group w-full h-full">
+        <div className="relative w-full h-full">
 
           <Image
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -21,12 +21,12 @@ export default function MovieCardOverlay({ movie, type }) {
           />
 
           {/* Hover Overlay */}
-          <div className="absolute gap-0 flex-col inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-0 justify-center rounded-md">  
+          <div className="absolute gap-0 flex-col inset-0 bg-black/50 transition-opacity duration-300 flex items-center justify-center rounded-md">  
             <RemoveFromWatchlistBtn movie={movie}/>
           </div>
 
           {/* Bottom gradient title */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/60 to-transparent p-2 rounded-b-md">
+          <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black via-black/60 to-transparent p-2 rounded-b-md">
             <h3 className="font-semibold text-white text-sm md:text-base leading-tight line-clamp-1">
               {movie.title || movie.name}
             </h3>
