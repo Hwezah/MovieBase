@@ -18,15 +18,21 @@ export default async function MoviePage({ params }) {
   return (
     <div className="overflow-x-hidden pb-20 text-center md:text-left ">
       {/* Hero Section */}
-      <div className="inset-0 bg-gradient-to-t from-black to-transparent opacity-90"></div>
+      
       <div className="relative lg:h-140 h-96 bg-gray-700 rounded-b-sm overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10 opacity-90"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black to-transparent z-10 opacity-90"></div>
+        <p className="text-white text-sm">
+  {movie.genres?.map((genre) => genre.name).join(" • ")}
+</p>
         <Image
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`}
           alt={title}
           fill
           className="object-cover object-center z-0 "
         />
+         <p className="absolute bottom-4 left-0 right-0 text-center text-yellow-500 text-lg z-20">
+    {movie.genres?.map((genre) => genre.name).join(" • ")}
+  </p>
       </div>
       {/* <h2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-xl">
         {movie.title}
@@ -52,7 +58,7 @@ export default async function MoviePage({ params }) {
             {credits?.cast?.slice(0, 6).map((actor) => (
               <div key={actor.id} className="flex flex-col items-center ">
                 {actor.profile_path && (
-                  <div className="w-24 h-24 flex-shrink-0">
+                  <div className="w-24 h-24 shrink-0">
                     <Image
                       className="rounded-full object-cover w-full h-full"
                       src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}

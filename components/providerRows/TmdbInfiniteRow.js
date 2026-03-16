@@ -87,14 +87,14 @@ export default function TmdbInfiniteRow({
     >
       {items.map((movie) =>
         movie?.poster_path ? (
-          <MovieCard movie={movie} type={type} key={movie.d}/>
+          <MovieCard movie={movie} type={type} key={movie.id}/>
         ) : null
       )}
 
-      <div ref={sentinelRef} className="flex-shrink-0 w-10" />
+      <div ref={sentinelRef} className="shrink-0 w-10" />
 
       {isLoading && (
-        <div className="flex items-center text-gray-300 text-sm flex-shrink-0 pr-4">
+        <div className="flex items-center text-gray-300 text-sm shrink-0 pr-4">
           Loading…
         </div>
       )}
@@ -102,13 +102,13 @@ export default function TmdbInfiniteRow({
         <button
           type="button"
           onClick={loadNextPage}
-          className="flex items-center text-red-300 text-sm flex-shrink-0 pr-4 underline"
+          className="flex items-center text-red-300 text-sm shrink-0 pr-4 underline"
         >
           Retry
         </button>
       )}
       {!hasMore && (
-        <div className="flex items-center text-gray-400 text-sm flex-shrink-0 pr-4">
+        <div className="flex items-center text-gray-400 text-sm shrink-0 pr-4">
           End
         </div>
       )}
