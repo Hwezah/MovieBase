@@ -1,5 +1,5 @@
 "use client"
-
+import { Suspense } from "react"
 import { useEffect, useMemo, useRef, useState } from "react"
 import MovieCard from "@/components/movieCard"
 import { useSearchParams } from "next/navigation"
@@ -93,7 +93,9 @@ export default function FilteredResultsRow() {
   return (
     <div className="space-y-4 px-2  md:px-4">
         <div className="flex gap-4 items-center"> <h2 className="text-white text-xl font-semibold">Filter Results</h2>
-        <MovieFilter /></div>
+        <Suspense fallback={<div className="text-gray-400 px-4">Loading filters...</div>}>
+  <MovieFilter />
+</Suspense></div>
      
       <div
         ref={scrollerRef}
