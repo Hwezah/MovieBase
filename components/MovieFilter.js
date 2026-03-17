@@ -57,7 +57,7 @@ export default function MovieFilter() {
   }
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 flex-1 sm:flex-none justify-end">
 
       {/* Genre Dropdown */}
       <Select
@@ -83,27 +83,21 @@ export default function MovieFilter() {
       </Select>
 
       {/* Year Dropdown */}
-      <Select
-        value={selectedYear}
-        onValueChange={(value) => {
-          setSelectedYear(value)
-          handleFilter(selectedGenre, value)
-        }}
-      >
-        <SelectTrigger
-  className="w-40 bg-gray-800 text-white border-0 cursor-pointer 
-             focus:outline-none focus:ring-0 focus:ring-offset-0
-             focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
->
-          <SelectValue placeholder="All Years" />
-        </SelectTrigger>
-        <SelectContent className="bg-gray-800 text-white border-none">
-          <SelectItem value="all">All Years</SelectItem>
-          {years.map((year) => (
-            <SelectItem key={year} value={String(year)}>{year}</SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      {/* Year Input */}
+<input
+  type="number"
+  min={currentYear - 20}
+  max={currentYear}
+  placeholder="Year"
+  value={selectedYear}
+  onChange={(e) => {
+    setSelectedYear(e.target.value)
+    if (e.target.value.length === 4) {
+      handleFilter(selectedGenre, e.target.value)
+    }
+  }}
+  className="w-24 bg-gray-800 text-white text-sm px-3 py-2 rounded-lg border-none outline-none placeholder:text-gray-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+/>
 
     </div>
   )
