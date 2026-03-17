@@ -13,7 +13,7 @@ export default async function ActorsPage({ params }) {
       {/* Actor Profile Section */}
       <div className="space-y-4 md:flex md:gap-6 md:space-y-0 items-end">
         {/* Image + small-screen text */}
-        <div className="flex ml-7  w-full gap-4 md:block md:w-1/4 shrink-0 justify-end items-center lg:justify-start">
+        <div className="flex ml-6  w-full gap-4 md:block md:w-1/4 shrink-0 justify-end items-center lg:justify-start">
           {/* Image */}
           <div className="w-[40%] md:w-full">
             <Image
