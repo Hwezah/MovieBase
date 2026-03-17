@@ -15,7 +15,7 @@ export default async function ActorsPage({ params }) {
         {/* Image + small-screen text */}
         <div className="flex w-full gap-4 md:block md:w-1/4 shrink-0 justify-end items-center lg:justify-start">
           {/* Image */}
-          <div className="w-[30%] md:w-full">
+          <div className="w-[40%] md:w-full">
             <Image
               src={`https://image.tmdb.org/t/p/w200${actorDetails.profile_path}`}
               alt={actorDetails.name}
