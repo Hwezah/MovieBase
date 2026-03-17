@@ -32,16 +32,20 @@ export default async function CommonHeader({ title }) {
             {heroMovie.title}
           </h1>
           <p className="text-white text-sm">
-  {movie.genres?.map((genre) => genre.name).join(" • ")}
-</p>
+            {movie.genres?.map((genre) => genre.name).join(" • ")}
+          </p>
           <div className="space-y-2 flex items-start justify-around gap-4 text-yellow-500">
             <p>{movie.release_date}</p>
             <p>{movie.runtime} min</p>
             <p>{movie.vote_average.toFixed(1)} / 10</p>
           </div>
-          <div className="flex items-center justify-center gap-10 ">
-                <AddToWatchlistBtn movie={movie} />  
-            <PlayButton trailerKey={trailer?.key} className="px-6" overlayClass="bg-transparent"/>
+          <div className="flex items-center justify-center gap-6 md:gap-8 xl:gap-10 ">
+            <AddToWatchlistBtn movie={movie} />
+            <PlayButton
+              trailerKey={trailer?.key}
+              className="px-6"
+              overlayClass="bg-transparent"
+            />
             <Link href={`/watch/movie-${movie.id}`} key={movie.id}>
               <button className="text-white cursor-pointer flex items-center gap-2 flex-col">
                 <Info className="w-5 h-5" />
