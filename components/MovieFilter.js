@@ -1,7 +1,8 @@
 "use client"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { ChevronDown } from "lucide-react"
 
 const genres = [
   { id: 28, name: "Action" },
@@ -23,18 +24,40 @@ export default function MovieFilter() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const [selectedGenre, setSelectedGenre] = useState(searchParams.get("with_genres") || "")
-  const [selectedYear, setSelectedYear] = useState(searchParams.get("primary_release_year") || "")
+  const [selectedGenre, setSelectedGenre] = useState("")
+  const [selectedYear, setSelectedYear] = useState("")
+
+  // Restore filters from localStorage on mount
+  useEffect(() => {
+    const savedGenre = localStorage.getItem("filter_genre") || ""
+    const savedYear = localStorage.getItem("filter_year") || ""
+
+    setSelectedGenre(savedGenre)
+    setSelectedYear(savedYear)
+
+    // Restore URL params too
+    if (savedGenre || savedYear) {
+      const params = new URLSearchParams()
+      if (savedGenre) params.set("with_genres", savedGenre)
+      if (savedYear) params.set("primary_release_year", savedYear)
+      router.replace(`/?${params.toString()}`)
+    }
+  }, [])
 
   const handleFilter = (genre, year) => {
+    // Save to localStorage
+    localStorage.setItem("filter_genre", genre || "")
+    localStorage.setItem("filter_year", year || "")
+
+    // Update URL
     const params = new URLSearchParams()
-    if (genre) params.set("with_genres", genre)
-    if (year) params.set("primary_release_year", year)
+    if (genre && genre !== "all") params.set("with_genres", genre)
+    if (year && year !== "all") params.set("primary_release_year", year)
     router.push(`/?${params.toString()}`)
   }
 
   return (
-    <div className="flex gap-4 px-4 py-2">
+    <div className="flex gap-4">
 
       {/* Genre Dropdown */}
       <Select
@@ -44,11 +67,7 @@ export default function MovieFilter() {
           handleFilter(value, selectedYear)
         }}
       >
-        <SelectTrigger
-  className="w-40 bg-gray-800 text-white border-0 cursor-pointer 
-             focus:outline-none focus:ring-0 focus:ring-offset-0
-             focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
->
+        <SelectTrigger className="w-40 bg-gray-800 text-white border-none focus:ring-0 focus:ring-offset-0">
           <SelectValue placeholder="All Genres" />
         </SelectTrigger>
         <SelectContent className="bg-gray-800 text-white border-none">
@@ -67,11 +86,7 @@ export default function MovieFilter() {
           handleFilter(selectedGenre, value)
         }}
       >
-        <SelectTrigger
-  className="w-40 bg-gray-800 text-white border-0 cursor-pointer 
-             focus:outline-none focus:ring-0 focus:ring-offset-0
-             focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
->
+        <SelectTrigger className="w-36 bg-gray-800 text-white border-none focus:ring-0 focus:ring-offset-0">
           <SelectValue placeholder="All Years" />
         </SelectTrigger>
         <SelectContent className="bg-gray-800 text-white border-none">

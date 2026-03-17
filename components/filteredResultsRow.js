@@ -86,7 +86,7 @@ export default function FilteredResultsRow() {
 
     io.observe(sentinelEl)
     return () => io.disconnect()
-  }, [with_genres, primary_release_year, page, hasMore, isLoading])
+  }, [with_genres, primary_release_year, page, hasMore, isLoading, loadNextPage])
 
   // Always render the filter
   return (
