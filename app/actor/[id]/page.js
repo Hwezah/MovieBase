@@ -9,24 +9,24 @@ export default async function ActorsPage({ params }) {
   const movies = credits.cast;
 
   return (
-    <div className="pb-20 px-4 py-8 space-y-10">
+    <div className="pb-20 px-4 py-16 space-y-10 ">
       {/* Actor Profile Section */}
       <div className="space-y-4 md:flex md:gap-6 md:space-y-0 items-end">
         {/* Image + small-screen text */}
-        <div className="flex w-full gap-4 md:block md:w-1/4 shrink-0">
+        <div className="flex w-full gap-4 md:block md:w-1/4 shrink-0 justify-end items-center lg:justify-start">
           {/* Image */}
-          <div className="w-1/2 md:w-full">
+          <div className="w-[30%] md:w-full">
             <Image
               src={`https://image.tmdb.org/t/p/w200${actorDetails.profile_path}`}
               alt={actorDetails.name}
               width={300}
               height={300}
-              className="rounded-xl object-cover w-full"
+              className="object-cover w-full rounded-full md:rounded-xl aspect-square md:aspect-auto"
             />
           </div>
 
           {/* Name + Meta (small screens only) */}
-          <div className="flex flex-col justify-end space-y-2 md:hidden w-1/2">
+          <div className="flex flex-col  space-y-2 md:hidden w-1/2">
             <h1 className="text-yellow-500 font-bold text-xl">
               {actorDetails.name}
             </h1>
