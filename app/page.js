@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
 
 import TmdbProvider from "@/components/providerRows/tmdbProvider";
-
+import FilteredResultsRow from "@/components/filteredResultsRow"
 import CommonHeader from "../components/commonHeader";
 export default async function Home() {
   return (
@@ -11,6 +11,9 @@ export default async function Home() {
       {/* Hero Section */}
       <CommonHeader />
 
+<div>
+<FilteredResultsRow />
+</div>
       {/* Trending Movies Row */}
       <div className="space-y-2 px-2 md:px-4 overflow-x-hidden">
         <h2 className="text-white text-xl font-semibold">Trending Movies</h2>
