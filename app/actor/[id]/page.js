@@ -74,11 +74,11 @@ export default async function ActorsPage({ params }) {
         <h2 className="text-white font-bold text-2xl">Movies</h2>
 
         <div
-          className="grid gap-4 
+          className="grid gap-2 md:gap-4 xl:gap-6
         grid-cols-[repeat(auto-fill,minmax(90px,1fr))] 
-        sm:grid-cols-[repeat(auto-fill,minmax(120px,1fr))] 
-        md:grid-cols-[repeat(auto-fill,minmax(140px,1fr))] 
-        lg:grid-cols-[repeat(auto-fill,minmax(160px,1fr))]"
+        sm:grid-cols-[repeat(auto-fill,minmax(100px,1fr))] 
+        md:grid-cols-[repeat(auto-fill,minmax(120px,1fr))] 
+        lg:grid-cols-[repeat(auto-fill,minmax(140px,1fr))]"
         >
           {movies.map((movie) =>
             movie?.poster_path ? (
