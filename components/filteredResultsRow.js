@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import MovieCard from "@/components/movieCard"
 import { useSearchParams } from "next/navigation"
 import MovieFilter from "@/components/MovieFilter"
+
 function dedupeById(items) {
   const seen = new Set()
   const out = []
@@ -35,7 +36,6 @@ export default function FilteredResultsRow() {
     return page < totalPages
   }, [page, totalPages])
 
-  // Reset when filters change
   useEffect(() => {
     setItems([])
     setPage(1)
@@ -86,49 +86,47 @@ export default function FilteredResultsRow() {
 
     io.observe(sentinelEl)
     return () => io.disconnect()
-  }, [with_genres, primary_release_year, page, hasMore, isLoading, loadNextPage])
+  }, [with_genres, primary_release_year, page, hasMore, isLoading])
 
-  if (!with_genres && !primary_release_year) return null
-
+  // Always render the filter
   return (
-    <div className="space-y-4 px-2  md:px-4">
-        <div className="flex gap-4 items-center"> <h2 className="text-white text-xl font-semibold">Filter Results</h2>
+    <div className="space-y-4 px-2 md:px-4">
+      <div className="flex gap-4 items-center">
+        <h2 className="text-white text-xl font-semibold">Discover</h2>
         <Suspense fallback={<div className="text-gray-400 px-4">Loading filters...</div>}>
-  <MovieFilter />
-</Suspense></div>
-     
-      <div
-        ref={scrollerRef}
-        className="flex space-x-4 py-2 px-2 snap-x snap-mandatory overflow-x-auto"
-      >
-        {items.map((movie) =>
-          movie?.poster_path ? (
-            <MovieCard key={movie.id} movie={movie} type="movie" />
-          ) : null
-        )}
-
-        <div ref={sentinelRef} className="shrink-0 w-10" />
-
-        {isLoading && (
-          <div className="flex items-center text-gray-300 text-sm shrink-0 pr-4">
-            Loading…
-          </div>
-        )}
-        {error && (
-          <button
-            type="button"
-            onClick={loadNextPage}
-            className="flex items-center text-red-300 text-sm shrink-0 pr-4 underline"
-          >
-            Retry
-          </button>
-        )}
-        {!hasMore && (
-          <div className="flex items-center text-gray-400 text-sm shrink-0 pr-4">
-            End
-          </div>
-        )}
+          <MovieFilter />
+        </Suspense>
       </div>
+
+      {/* Only show results when a filter is selected */}
+      {(with_genres || primary_release_year) && (
+        <div
+          ref={scrollerRef}
+          className="flex space-x-4 py-2 px-2 snap-x snap-mandatory overflow-x-auto"
+        >
+          {items.map((movie) =>
+            movie?.poster_path ? (
+              <MovieCard key={movie.id} movie={movie} type="movie" />
+            ) : null
+          )}
+          <div ref={sentinelRef} className="shrink-0 w-10" />
+          {isLoading && (
+            <div className="flex items-center text-gray-300 text-sm shrink-0 pr-4">
+              Loading…
+            </div>
+          )}
+          {error && (
+            <button type="button" onClick={loadNextPage} className="flex items-center text-red-300 text-sm shrink-0 pr-4 underline">
+              Retry
+            </button>
+          )}
+          {!hasMore && (
+            <div className="flex items-center text-gray-400 text-sm shrink-0 pr-4">
+              End
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
