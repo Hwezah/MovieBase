@@ -58,9 +58,9 @@ export default async function ActorsPage({ params }) {
           </div>
 
           {/* Full biography (md+) */}
-          <p className="text-gray-300 text-sm leading-relaxed">
-            {actorDetails.biography}
-          </p>
+          <div className="hidden md:block">
+            <BiographyExpander biography={actorDetails.biography} />
+          </div>
         </div>
       </div>
 
