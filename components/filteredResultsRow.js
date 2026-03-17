@@ -90,8 +90,8 @@ export default function FilteredResultsRow() {
 
   // Always render the filter
   return (
-    <div className="space-y-4 px-2 md:px-4">
-      <div className="flex gap-4 items-center">
+    <div className="space-y-4 px-2 md:px-4 flex flex-col">
+      <div className="flex gap-4 items-center self-end">
         <h2 className="text-white text-xl font-semibold">Discover</h2>
         <Suspense fallback={<div className="text-gray-400 px-4">Loading filters...</div>}>
           <MovieFilter />

@@ -67,7 +67,11 @@ export default function MovieFilter() {
           handleFilter(value, selectedYear)
         }}
       >
-        <SelectTrigger className="w-40 bg-gray-800 text-white border-none focus:ring-0 focus:ring-offset-0">
+        <SelectTrigger
+  className="w-40 bg-gray-800 text-white border-0 cursor-pointer 
+             focus:outline-none focus:ring-0 focus:ring-offset-0
+             focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+>
           <SelectValue placeholder="All Genres" />
         </SelectTrigger>
         <SelectContent className="bg-gray-800 text-white border-none">
@@ -86,7 +90,11 @@ export default function MovieFilter() {
           handleFilter(selectedGenre, value)
         }}
       >
-        <SelectTrigger className="w-36 bg-gray-800 text-white border-none focus:ring-0 focus:ring-offset-0">
+        <SelectTrigger
+  className="w-40 bg-gray-800 text-white border-0 cursor-pointer 
+             focus:outline-none focus:ring-0 focus:ring-offset-0
+             focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+>
           <SelectValue placeholder="All Years" />
         </SelectTrigger>
         <SelectContent className="bg-gray-800 text-white border-none">
