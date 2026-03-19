@@ -1,8 +1,7 @@
 "use client"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-
 
 const genres = [
   { id: 28, name: "Action" },
@@ -18,86 +17,99 @@ const genres = [
 ]
 
 const currentYear = new Date().getFullYear()
-const years = Array.from({ length: 20 }, (_, i) => currentYear - i)
 
 export default function MovieFilter() {
   const router = useRouter()
-  const searchParams = useSearchParams()
 
   const [selectedGenre, setSelectedGenre] = useState("")
   const [selectedYear, setSelectedYear] = useState("")
+  const [yearError, setYearError] = useState("")
 
-  // Restore filters from localStorage on mount
+  // Restore only genre from localStorage on mount
+  // Year starts empty always
   useEffect(() => {
     const savedGenre = localStorage.getItem("filter_genre") || ""
-    const savedYear = localStorage.getItem("filter_year") || ""
-
     setSelectedGenre(savedGenre)
-    setSelectedYear(savedYear)
+  }, [])
 
-    // Restore URL params too
-    // if (savedGenre || savedYear) {
-    //   const params = new URLSearchParams()
-    //   if (savedGenre) params.set("with_genres", savedGenre)
-    //   if (savedYear) params.set("primary_release_year", savedYear)
-    //   router.replace(`/?${params.toString()}`)
-    // }
-  },)
+  const isValidYear = (year) => {
+    const num = Number(year)
+    // Must be a 4 digit number
+    // Must be between 1888 (first ever film) and current year
+    return (
+      year.length === 4 &&
+      !isNaN(num) &&
+      num >= 1888 &&
+      num <= currentYear
+    )
+  }
 
   const handleFilter = (genre, year) => {
-    // Save to localStorage
-    localStorage.setItem("filter_genre", genre || "")
-    localStorage.setItem("filter_year", year || "")
+    // Both must have values to trigger results
+    if (!genre || genre === "all" || !year) return
 
-    // Update URL
+    // Save genre to localStorage
+    localStorage.setItem("filter_genre", genre)
+
     const params = new URLSearchParams()
-    if (genre && genre !== "all") params.set("with_genres", genre)
-    if (year && year !== "all") params.set("primary_release_year", year)
+    params.set("with_genres", genre)
+    params.set("primary_release_year", year)
     router.push(`/?${params.toString()}`)
   }
 
-  return (
-    <div className="flex gap-4 flex-1 sm:flex-none justify-end">
-
-      {/* Genre Dropdown */}
-      <Select
-        value={selectedGenre}
-        onValueChange={(value) => {
-          setSelectedGenre(value)
-          handleFilter(value, selectedYear)
-        }}
-      >
-        <SelectTrigger
-  className="w-40 bg-gray-800 text-white border-0 cursor-pointer 
-             focus:outline-none focus:ring-0 focus:ring-offset-0
-             focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
->
-          <SelectValue placeholder="All Genres" />
-        </SelectTrigger>
-        <SelectContent className="bg-gray-800 text-white border-none">
-          <SelectItem value="all">All Genres</SelectItem>
-          {genres.map((genre) => (
-            <SelectItem key={genre.id} value={String(genre.id)}>{genre.name}</SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-
-      {/* Year Dropdown */}
-      {/* Year Input */}
-<input
-  type="number"
-  min={currentYear - 20}
-  max={currentYear}
-  placeholder="Year"
-  value={selectedYear}
-  onChange={(e) => {
-    setSelectedYear(e.target.value)
-    if (e.target.value.length === 4) {
-      handleFilter(selectedGenre, e.target.value)
+  const handleYearKeyDown = (e) => {
+    // Only trigger on Enter key
+    if (e.key === "Enter") {
+      if (!isValidYear(selectedYear)) {
+        setYearError("Please enter a valid year e.g. 1999")
+        return
+      }
+      setYearError("")
+      handleFilter(selectedGenre, selectedYear)
     }
-  }}
-  className="w-24 bg-gray-800 text-white text-sm px-3 py-2 rounded-lg border-none outline-none placeholder:text-gray-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-/>
+  }
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex gap-4">
+
+        {/* Genre Dropdown */}
+        <Select
+          value={selectedGenre}
+          onValueChange={(value) => {
+            setSelectedGenre(value)
+          }}
+        >
+          <SelectTrigger className="w-40 bg-gray-800 text-white border-none focus:ring-0 focus:ring-offset-0">
+            <SelectValue placeholder="All Genres" />
+          </SelectTrigger>
+          <SelectContent className="bg-gray-800 text-white border-none">
+            <SelectItem value="all">All Genres</SelectItem>
+            {genres.map((genre) => (
+              <SelectItem key={genre.id} value={String(genre.id)}>{genre.name}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        {/* Year Input */}
+        <input
+          type="number"
+          placeholder="Year e.g. 1999"
+          value={selectedYear}
+          onChange={(e) => {
+            setSelectedYear(e.target.value)
+            setYearError("") // clear error as user types
+          }}
+          onKeyDown={handleYearKeyDown}
+          className="w-36 bg-gray-800 text-white text-sm px-3 py-2 rounded-lg border-none outline-none placeholder:text-gray-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        />
+
+      </div>
+
+      {/* Year error message */}
+      {yearError && (
+        <p className="text-red-400 text-xs">{yearError}</p>
+      )}
 
     </div>
   )
