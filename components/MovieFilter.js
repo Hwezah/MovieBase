@@ -2,7 +2,7 @@
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState, useEffect } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ChevronDown } from "lucide-react"
+
 
 const genres = [
   { id: 28, name: "Action" },
@@ -36,13 +36,13 @@ export default function MovieFilter() {
     setSelectedYear(savedYear)
 
     // Restore URL params too
-    if (savedGenre || savedYear) {
-      const params = new URLSearchParams()
-      if (savedGenre) params.set("with_genres", savedGenre)
-      if (savedYear) params.set("primary_release_year", savedYear)
-      router.replace(`/?${params.toString()}`)
-    }
-  }, [])
+    // if (savedGenre || savedYear) {
+    //   const params = new URLSearchParams()
+    //   if (savedGenre) params.set("with_genres", savedGenre)
+    //   if (savedYear) params.set("primary_release_year", savedYear)
+    //   router.replace(`/?${params.toString()}`)
+    // }
+  },)
 
   const handleFilter = (genre, year) => {
     // Save to localStorage

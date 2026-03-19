@@ -25,7 +25,7 @@ export default function AddToWatchlistBtn({ movie }) {
       <p className={message?.success ? "text-green-400" : message?.error ? "text-red-400" : "text-white"}>
         {loading && "Adding..."}
         {message?.success && "Watchlisted!"}
-        {message?.error && "Already Watchlisted"}
+        {message?.error && message.error}
         {!loading && !message && "Watchlist"}
       </p>
     </button>
