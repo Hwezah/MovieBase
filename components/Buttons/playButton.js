@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 
 if (typeof window === "undefined") return null;
 // ─── Custom Modal ─────────────────────────────────────────────────────────────
-function TrailerModal({ trailerKey, onClose }) {
+function TrailerModal({movie, trailerKey, onClose }) {
   const modalRef = useRef(null);
   const [isMuted, setIsMuted] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -77,7 +77,7 @@ function TrailerModal({ trailerKey, onClose }) {
         {/* Top bar */}
         <div className="flex items-center justify-between border-b border-white/10 bg-neutral-900 px-4 py-2">
           <span className="font-mono text-xs tracking-widest text-white/30 uppercase">
-            ▶ Now Playing
+          ▶ Now Playing | {movie?.title || "Loading..."}
           </span>
           <div className="flex items-center gap-1">
             {/* Mute toggle */}
@@ -134,7 +134,7 @@ function TrailerModal({ trailerKey, onClose }) {
 }
 
 // ─── Play Button ──────────────────────────────────────────────────────────────
-export default function PlayButton({ trailerKey, className = "" }) {
+export default function PlayButton({movie, trailerKey, className = "" }) {
   const { isPlaying, setIsPlaying } = useStateContext();
 
   return (
@@ -149,6 +149,7 @@ export default function PlayButton({ trailerKey, className = "" }) {
 
       {isPlaying && (
         <TrailerModal
+        movie={movie}
           trailerKey={trailerKey}
           onClose={() => setIsPlaying(false)}
         />

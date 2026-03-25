@@ -76,7 +76,7 @@ export default async function MoviePage({ params }) {
       </div>
       <div className="mb-12"><RecommendationsRow movieId={movie.id} /></div>
       <div className="flex flex-col md:flex-row gap-4 w-full mt-auto px-4 pb-4">
-        <PlayButton trailerKey={trailer?.key} className="flex-1" />
+        <PlayButton trailerKey={trailer?.key} movie={movie} className="flex-1" />
         <AddToWatchlistBtn movie={movie} />
         <DownloadButton movieId={movie.id} />
       </div>
