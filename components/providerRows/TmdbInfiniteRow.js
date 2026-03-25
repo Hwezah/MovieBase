@@ -100,6 +100,9 @@ export default function TmdbInfiniteRow({
         <SkeletonCard />
         <SkeletonCard />
         <SkeletonCard />
+        <SkeletonCard />
+        <SkeletonCard />
+    
       </>
       )}
       {error && (

@@ -71,7 +71,7 @@ export default async function MoviePage({ params }) {
           </div>
         </div>
       </div>
-      <div className="mb-14">
+      <div className="mb-8">
         <RecommendationsRow movieId={movie.id} />
       </div>
       <div className="flex flex-col md:flex-row gap-4 w-full mt-auto px-4 pb-4">
