@@ -15,7 +15,7 @@ export const metadata = {
 }
 export default async function SearchResultsPage({ searchParams }) {
   const query = (await searchParams).q;
-  console.log("Search query:", query);
+ 
   let results = [];
   if (query) {
     try {
@@ -23,9 +23,7 @@ export default async function SearchResultsPage({ searchParams }) {
     } catch (error) {
       console.error("Error searching media:", error);
     }
-  } else {
-    console.log("No search query provided.");
-  }
+  } 
   return (
     <div className="space-y-8 overflow-x-hidden py-8 px-4 text-center md:text-left ">
       <h1 className="text-white font-bold text-2xl">Search</h1>

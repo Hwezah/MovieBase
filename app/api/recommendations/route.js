@@ -6,7 +6,7 @@ export async function GET(request) {
     const pageParam = searchParams.get("page") || "1";
     const page = Number.parseInt(pageParam, 10) || 1;
 
-    console.log("RECOMMENDATIONS ROUTE HIT — id:", id, "page:", page)
+  
   
     try {
       const data = await fetchMovieRecommendations({ id, page });

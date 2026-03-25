@@ -4,7 +4,7 @@ import { CircleUserRound } from "lucide-react";
 import LogoutChev from "@/components/Buttons/logOutChev";
 export default async function SettingsPage() {
   const { user } = (await auth()) || {};
-  console.log(user)
+
   const { email, name, image } = user || {};
 
   return (
