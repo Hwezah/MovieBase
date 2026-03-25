@@ -34,7 +34,7 @@ export default function PlayButton({ trailerKey, className = "", overlayClass = 
     <>
       <Button
         onClick={handlePlayClick}
-        className={` flex items-center py-4 lg:py-6 bg-white text-black rounded-sm hover:bg-black hover:text-white transition-colors  text-center cursor-pointer ${className}`}
+        className={` flex items-center py-4 md:py-6 bg-white text-black rounded-sm hover:bg-black hover:text-white transition-colors  text-center cursor-pointer ${className}`}
       >
         <Play className="w-6 h-6" />
         Play
