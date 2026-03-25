@@ -1,5 +1,5 @@
 "use client"
-
+import SkeletonCard from "@/components//ui/skeletonCard"
 import { useEffect, useMemo, useRef, useState } from "react"
 import MovieCard from "@/components/movieCard"
 
@@ -92,10 +92,13 @@ useEffect(() => {
         <div ref={sentinelRef} className="shrink-0 w-10" />
 
         {isLoading && (
-          <div className="flex items-center text-gray-300 text-sm shrink-0 pr-4">
-            Loading…
-          </div>
-        )}
+  <>
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+  </>
+)}
         {error && (
           <button type="button" onClick={loadNextPage} className="flex items-center text-red-300 text-sm shrink-0 pr-4 underline">
             Retry
