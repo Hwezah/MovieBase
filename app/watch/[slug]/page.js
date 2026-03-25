@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation"
 import DownloadButton from "@/components/Buttons/downloadButton";
 import AddToWatchlistBtn from "@/components/Buttons/addToWatchlistBtn";
 import PlayButton from "@/components/Buttons/playButton";
@@ -8,6 +9,7 @@ export default async function MoviePage({ params }) {
   const { slug } = await params;
   const [type, id] = slug.split("-");
   const movie = await fetchMediaDetails(type, id);
+  if (!movie) notFound()
   const credits = movie.credits;
   const trailer = movie.videos?.results.find(
     (video) => video.type === "Trailer" && video.site === "YouTube",
@@ -18,7 +20,7 @@ export default async function MoviePage({ params }) {
 
   return (
     <div className="overflow-x-hidden pb-20 text-center md:text-left ">
-      {/* Hero Section */}
+
       
       <div className="relative lg:h-140 h-96 bg-gray-700 rounded-b-sm overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-t from-black to-transparent z-10 opacity-90"></div>

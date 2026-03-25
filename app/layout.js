@@ -1,4 +1,4 @@
-import {SessionProvider} from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import { Montserrat } from "next/font/google";
 import Footer from "@/components/footer";
 import "./globals.css";
@@ -8,7 +8,6 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"], // optional, include the weights you need
 });
-
 
 export const metadata = {
   title: "MovieBase",
@@ -23,7 +22,7 @@ export const metadata = {
 
 export const viewport = {
   themeColor: "#000000",
-}
+};
 
 export default function RootLayout({ children }) {
   return (
