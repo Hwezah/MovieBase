@@ -6,6 +6,33 @@ import AddToWatchlistBtn from "@/components/Buttons/addToWatchlistBtn";
 import PlayButton from "@/components/Buttons/playButton";
 import { fetchMediaDetails } from "@/lib/tmdb";
 import Image from "next/image";
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params
+  const [type, id] = slug.split("-")
+  const movie = await fetchMediaDetails(type, id)
+
+  if (!movie) return { title: "Movie Not Found — MovieBase" }
+
+  return {
+    title: `${movie.title || movie.name} — MovieBase`,
+    description: movie.overview,
+    openGraph: {
+      title: `${movie.title || movie.name} — MovieBase`,
+      description: movie.overview,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+          width: 500,
+          height: 750,
+          alt: movie.title || movie.name,
+        }
+      ],
+      siteName: "MovieBase",
+    },
+  }
+}
+
 export default async function MoviePage({ params }) {
   const { slug } = await params;
   const [type, id] = slug.split("-");

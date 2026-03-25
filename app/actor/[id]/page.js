@@ -3,6 +3,37 @@ import { notFound } from "next/navigation"
 import { fetchActorDetails } from "@/lib/tmdb";
 import MovieCard from "@/components/movieCard";
 import BiographyExpander from "@/components/biographyExpander";
+
+
+export async function generateMetadata({ params }) {
+  const { id } = await params
+  const actorDetails = await fetchActorDetails(id)
+
+  if (!actorDetails) return { title: "Actor Not Found — MovieBase" }
+
+  return {
+    title: `${actorDetails.name} — MovieBase`,
+    description: actorDetails.biography
+      ? actorDetails.biography.slice(0, 160)
+      : `Explore ${actorDetails.name}'s full filmography on MovieBase.`,
+    openGraph: {
+      title: `${actorDetails.name} — MovieBase`,
+      description: actorDetails.biography
+        ? actorDetails.biography.slice(0, 160)
+        : `Explore ${actorDetails.name}'s full filmography on MovieBase.`,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/w500${actorDetails.profile_path}`,
+          width: 500,
+          height: 750,
+          alt: actorDetails.name,
+        }
+      ],
+      siteName: "MovieBase",
+    },
+  }
+}
+
 export default async function ActorsPage({ params }) {
   const { id } = await params;
   const actorDetails = await fetchActorDetails(id);

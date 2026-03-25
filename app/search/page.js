@@ -2,6 +2,17 @@ import { searchMedia } from "@/lib/tmdb";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+
+
+export const metadata = {
+  title: "Search — MovieBase",
+  description: "Search for any movie or TV show on MovieBase.",
+  openGraph: {
+    title: "Search — MovieBase",
+    description: "Search for any movie or TV show on MovieBase.",
+    siteName: "MovieBase",
+  },
+}
 export default async function SearchResultsPage({ searchParams }) {
   const query = (await searchParams).q;
   console.log("Search query:", query);

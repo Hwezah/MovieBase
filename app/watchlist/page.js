@@ -3,6 +3,18 @@ import { fetchMediaDetails } from "@/lib/tmdb";
 import supabaseAdmin from "@/lib/supabase/admin";
 import { auth } from "@/lib/auth";
 import MovieCardOverlay from "@/components/movieCardOverlay";
+
+
+export const metadata = {
+  title: "My Watchlist — MovieBase",
+  description: "Your personal movie watchlist. Keep track of movies you want to watch.",
+  openGraph: {
+    title: "My Watchlist — MovieBase",
+    description: "Your personal movie watchlist.",
+    siteName: "MovieBase",
+  },
+}
+
 export default async function WatchlistPage() {
   const { user } = (await auth()) || {}; // guard against null
 
