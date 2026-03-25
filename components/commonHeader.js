@@ -43,7 +43,7 @@ export default async function CommonHeader({ title }) {
             <AddToWatchlistBtn movie={movie} />
             <PlayButton
               trailerKey={trailer?.key}
-              className="px-6"
+              className="px-6 z-50"
               overlayClass="bg-transparent"
             />
             <Link href={`/watch/movie-${movie.id}`} key={movie.id}>
