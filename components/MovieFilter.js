@@ -70,10 +70,10 @@ export default function MovieFilter() {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex gap-4">
+    <div className="flex flex-col gap-2 ">
+      <div className="flex gap-4 ">
 
-        {/* Genre Dropdown */}
+      
         <Select
           value={selectedGenre}
           onValueChange={(value) => {
@@ -91,7 +91,7 @@ export default function MovieFilter() {
           </SelectContent>
         </Select>
 
-        {/* Year Input */}
+     
         <input
           type="number"
           placeholder="Year e.g. 1999"
@@ -106,7 +106,7 @@ export default function MovieFilter() {
 
       </div>
 
-      {/* Year error message */}
+  
       {yearError && (
         <p className="text-red-400 text-xs">{yearError}</p>
       )}
