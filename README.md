@@ -8,7 +8,9 @@ A modern, full-stack movie discovery and watchlist app built with Next.js 15, po
 
 ## 📸 Screenshots
 
-> Coming soon
+![Home Page](public/screenshots/home.png)
+![Movie Details](public/screenshots/movie-details.png)
+![Watchlist](public/screenshots/watchlist.png)
 
 ---
 
