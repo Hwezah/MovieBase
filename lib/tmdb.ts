@@ -1,4 +1,8 @@
-export async function fetchMedia(category = "trending", type = "movie", options) {
+type FetchMediaProps = {
+    page?: number
+    includeMeta?: boolean
+} & RequestInit
+export async function fetchMedia(category = "trending", type = "movie", options: FetchMediaProps) {
   const apiKey = process.env.TMDB_API_KEY;
   if (!apiKey) throw new Error("TMDB_API_KEY not found in environment");
 
@@ -10,7 +14,7 @@ export async function fetchMedia(category = "trending", type = "movie", options)
   const includeMeta = Boolean(opts.includeMeta);
   const { page: _page, includeMeta: _includeMeta, ...fetchOptions } = opts;
 
-  let url;
+  let url: string;
   if (category === "trending") {
     url = `https://api.themoviedb.org/3/trending/${type}/week?api_key=${apiKey}&language=en-US&page=${page}`;
   } else if (category === "popular") {
@@ -41,7 +45,7 @@ export async function fetchMedia(category = "trending", type = "movie", options)
   };
 }
 
-export async function fetchMediaDetails(type, id) {
+export async function fetchMediaDetails(type: string, id: string) {
   const apiKey = process.env.TMDB_API_KEY;
 
   if (!apiKey) throw new Error("TMDB_API_KEY not found in environment");
@@ -65,8 +69,25 @@ export async function searchMedia(query) {
   return data.results || [];
 }
 
-
-export async function fetchActorDetails(person_id) {
+type ActorDetails = {
+  name: string
+  biography: string
+  birthday: string
+  profile_path: string
+  known_for_department: string
+  credits: {
+    cast: {
+      id: number
+      poster_path: string | null
+      title?: string
+      name?: string
+      genres?: { name: string }[]
+      release_date?: string
+      vote_average?: number
+    }[]
+  }
+}
+export async function fetchActorDetails(person_id: string) {
   const apiKey = process.env.TMDB_API_KEY;
 
   if (!apiKey) throw new Error("TMDB_API_KEY not found in environment");
@@ -77,13 +98,19 @@ export async function fetchActorDetails(person_id) {
 
   if (!res.ok) throw new Error("Failed to fetch actor details");
 
-  const data = await res.json();
+  const data = await res.json() as ActorDetails;
   return data;
 }
 
 
 // { with_genres, primary_release_year, sort_by, page }...These are the filters the user selects. It builds a URL with those filters and fetches the results from TMDB.
-export async function fetchDiscoverMovies({ with_genres, primary_release_year, sort_by,  page = 1 }) {
+type FetchDiscoverMoviesProps = {
+  with_genres?: string
+  primary_release_year?: string
+  sort_by?: string
+  page?: number 
+}
+export async function fetchDiscoverMovies({ with_genres, primary_release_year, sort_by,  page = 1 }: FetchDiscoverMoviesProps) {
   const apiKey = process.env.TMDB_API_KEY;
 
   if (!apiKey) throw new Error("TMDB_API_KEY not found in environment");
@@ -93,7 +120,7 @@ export async function fetchDiscoverMovies({ with_genres, primary_release_year, s
 // Why URLSearchParams Here??
 // We use URLSearchParams instead of manually building the URL string because filters are optional — a user might select only a genre with no year, or only a year with no genre. URLSearchParams lets us conditionally add only the params that have values.
   params.append("api_key", apiKey)
-  params.append("page", page)
+  params.append("page", String(page))
   if (with_genres) params.append("with_genres", with_genres)
   if (primary_release_year) params.append("primary_release_year", primary_release_year)
   if (sort_by) params.append("sort_by", sort_by)
@@ -110,14 +137,17 @@ export async function fetchDiscoverMovies({ with_genres, primary_release_year, s
   return data;
 }
 
-
-export async function fetchMovieRecommendations({ id, page = 1 }) {
+type FetchMovieRecommendationsProps = {
+  id: string
+  page?: number
+}
+export async function fetchMovieRecommendations({ id, page = 1 }: FetchMovieRecommendationsProps) {
   const apiKey = process.env.TMDB_API_KEY;
   if (!apiKey) throw new Error("TMDB_API_KEY not found in environment");
 
   const params = new URLSearchParams()
   params.append("api_key", apiKey)
-  params.append("page", page)
+  params.append("page", String(page))
 
   const url = `https://api.themoviedb.org/3/movie/${id}/recommendations?${params.toString()}`
 

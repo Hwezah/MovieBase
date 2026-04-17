@@ -3,7 +3,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-export default function MovieCard({ movie, type }) {
+
+type MovieCardProps = {
+  movie: {
+    id: number
+    poster_path: string | null
+    title?: string
+    name?: string
+    genres?: { name: string }[]
+    release_date?: string
+    vote_average?: number
+  }
+  type: string
+  key: number
+}
+
+export default function MovieCard({ movie, type }: MovieCardProps) {
  
   return (
      

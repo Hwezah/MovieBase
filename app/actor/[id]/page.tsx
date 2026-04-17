@@ -1,15 +1,18 @@
 import Image from "next/image";
-import { notFound } from "next/navigation"
+import { notFound } from "next/navigation";
 import { fetchActorDetails } from "@/lib/tmdb";
 import MovieCard from "@/components/movieCard";
 import BiographyExpander from "@/components/biographyExpander";
 
+type ActorPageProps = {
+  params: Promise<{ id: string }>;
+};
 
-export async function generateMetadata({ params }) {
-  const { id } = await params
-  const actorDetails = await fetchActorDetails(id)
+export async function generateMetadata({ params }: ActorPageProps) {
+  const { id } = await params;
+  const actorDetails = await fetchActorDetails(id);
 
-  if (!actorDetails) return { title: "Actor Not Found — MovieBase" }
+  if (!actorDetails) return { title: "Actor Not Found — MovieBase" };
 
   return {
     title: `${actorDetails.name} — MovieBase`,
@@ -27,27 +30,24 @@ export async function generateMetadata({ params }) {
           width: 500,
           height: 750,
           alt: actorDetails.name,
-        }
+        },
       ],
       siteName: "MovieBase",
     },
-  }
+  };
 }
 
-export default async function ActorsPage({ params }) {
+export default async function ActorsPage({ params }: ActorPageProps) {
   const { id } = await params;
   const actorDetails = await fetchActorDetails(id);
-  if (!actorDetails) notFound()
+  if (!actorDetails) return notFound();
   const { credits } = actorDetails;
   const movies = credits.cast;
 
   return (
     <div className="pb-20  px-4 py-16 space-y-10 ">
-    
       <div className="space-y-4 md:flex md:gap-6 md:space-y-0 items-end">
-        
         <div className="flex ml-6  w-full gap-4 md:block md:w-1/4 shrink-0 justify-end items-center lg:justify-start">
-
           <div className="w-[40%] md:w-full">
             <Image
               src={`https://image.tmdb.org/t/p/w200${actorDetails.profile_path}`}
@@ -58,7 +58,6 @@ export default async function ActorsPage({ params }) {
             />
           </div>
 
-          
           <div className="flex flex-col  space-y-2 md:hidden w-1/2">
             <h1 className="text-yellow-500 font-bold text-xl">
               {actorDetails.name}
@@ -75,7 +74,6 @@ export default async function ActorsPage({ params }) {
           </div>
         </div>
 
-
         <div className="hidden md:flex md:flex-col md:justify-end md:space-y-3 flex-1">
           <h1 className="text-yellow-500 font-bold text-2xl">
             {actorDetails.name}
@@ -90,19 +88,16 @@ export default async function ActorsPage({ params }) {
             </span>
           </div>
 
-         
           <div className="hidden md:block">
             <BiographyExpander biography={actorDetails.biography} />
           </div>
         </div>
       </div>
 
-   
       <div className="md:hidden">
         <BiographyExpander biography={actorDetails.biography} />
       </div>
 
-  
       <div className="space-y-4">
         <h2 className="text-white font-bold text-2xl">Movies</h2>
 
@@ -123,3 +118,4 @@ export default async function ActorsPage({ params }) {
     </div>
   );
 }
+

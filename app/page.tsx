@@ -1,10 +1,10 @@
-export const dynamic = "force-dynamic";
-
-export const fetchCache = "force-no-store";
 import { Suspense } from "react"
 import TmdbProvider from "@/components/providerRows/tmdbProvider";
 import FilteredResultsRow from "@/components/filteredResultsRow"
-import CommonHeader from "../components/commonHeader";
+import CommonHeader from "@/components/commonHeader";
+
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 
 export const metadata = {
